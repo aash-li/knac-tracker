@@ -1,23 +1,28 @@
+import React, { useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
+import Login from './components/Login';
+import Logout from './components/Logout';
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [name, setName] = useState()
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="21 days">
+      <header className="21 Days">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to 21 days, a habit tracker.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+
+      <div style={{}}>
+        <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>
+        {loggedIn ? <p>Hello {name}</p>: <p>Not logged in</p> }
+        <Logout loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)}/>
+      </div>
     </div>
   );
 }
