@@ -4,7 +4,12 @@ import UserRow from './UserRow'
 
 function Progress() {
     return (
-        <Checkbox />
+        <div>
+            <UserRow />
+            <UserRow />
+            <UserRow />
+            <UserRow />
+        </div>
     )
 }
 

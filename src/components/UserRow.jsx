@@ -4,11 +4,28 @@ import { Checkbox } from '@material-ui/core';
 function UserRow() {
     return (
         <div>
-            <label class="username">Name: </label>
-            <Checkbox class = "check" />
-            <Checkbox class = "check" />
-            <Checkbox class = "check" />
-            <Checkbox class = "check" />
+        <p>Name</p>
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
+        <Checkbox />
         </div>
     )
 }
