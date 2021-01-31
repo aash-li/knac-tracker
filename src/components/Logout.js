@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { GoogleLogout } from 'react-google-login';
 
-const clientId = '528798288833-6jp9ee02c0otfb0hl3atolk4eff6pibq.apps.googleusercontent.com' //insert client id here
+const clientId = '608833851290-55503koreo294pqg48nqpqu6lpi549ka.apps.googleusercontent.com' //insert client id here
 
 function Logout(props) {
+  const [clickedLogoutButton, setClickedLogoutButton] = useState(false)
 
   const onSuccess = () => {
     console.log('Logout made successfully');
-    alert('Logout made successfully ✌');
     props.setLoggedIn(false);
   };
 
