@@ -6,9 +6,6 @@ function Header(props) {
     <div>
       <nav>
         <div class="container">
-          <Link class="navbar-brand" to="/">
-            React Multi-Page Website
-          </Link>
 
           <div>
             <ul>
@@ -23,11 +20,11 @@ function Header(props) {
               </li>
               <li
                 class={`nav-item  ${
-                  props.location.pathname === "/about" ? "active" : ""
+                  props.location.pathname === "/goal" ? "active" : ""
                 }`}
               >
-                <Link class="nav-link" to="/about">
-                  About
+                <Link class="nav-link" to="/goal">
+                  Goal
                 </Link>
               </li>
               <li

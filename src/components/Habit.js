@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Stickies from './Stickies'
+import Progress from './Progress'
 
 /**
  * Props:
@@ -56,6 +57,7 @@ class Habit extends Component {
       <div class='habitpage'>
         <h3>{this.state.title}</h3>
         <h5>Day {this.state.day} of {this.state.length}</h5>
+        <Progress />
         <Stickies habitId={this.props.id} database={this.props.database}/>
         <textarea class='comment-box' onChange={this.updateComment}/>
         <button onClick={this.submitComment}>send</button>

@@ -7,7 +7,7 @@ import Logout from './components/Logout';
 import Habit from './components/Habit';
 import Progress from './components/Progress';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Header, Home, About, Contact } from "./components";
+import { Header, Home, Goal, Contact } from "./components";
 import Stickies from './components/Stickies';
 
 function App() {
@@ -37,29 +37,23 @@ function App() {
   return (
     <div className="21 days">
       <header className="21 Days">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p class="title"> 
           Welcome to 21 days, a habit tracker.
         </p>
       </header>
-
+      <div style={{}}>
+        <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)} class="login"/>
+        {loggedIn ? <p>Hello {name}</p>: <p>Not logged in</p> }
+        <Logout loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)}/>
+      </div>
       <Router>
         <Header />
         <Switch>
           <Route path="/" exact component={() => <Home />} />
-          <Route path="/about" exact component={() => <About />} />
+          <Route path="/Goal" exact component={() => <Goal database={database}/>}/>
           <Route path="/contact" exact component={() => <Contact />} />
         </Switch>
       </Router>
-      <Habit id='1' database={database}/>
-      <div><Progress /></div>
-      <Stickies database={database}/>
-
-      <div style={{}}>
-        <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>
-        {loggedIn ? <p>Hello {name}</p>: <p>Not logged in</p> }
-        <Logout loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)}/>
-      </div>
     </div>
   );
 }
