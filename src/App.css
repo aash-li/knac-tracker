@@ -1,3 +1,19 @@
+/* stickies */
+.stickie {
+  width: auto;
+  font-size: 12pt;
+  margin: 20px;
+  background-color: beige;
+  color: black;
+  padding: 5pt;
+}
+
+#stickies {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .App {
   text-align: center;
 }

@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import Stickies from './components/Stickies';
 
 function App() {
 
@@ -14,13 +15,19 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [name, setName] = useState()
 
+  let messagesRef = database.ref("habits/habit1");
+  messagesRef.once('value').then((snapshot) => {
+    const data = snapshot.val();
+  });
+
 	function testfunc() {
-    console.log("entered");
-		database.ref("tests/test1").set( {
+    /*
+	  database.ref("tests/test1").set( {
 			testnum : 1,
 			really : true,
 			yay : "no"
 		});
+    */
 	}
 
   return (
@@ -32,7 +39,7 @@ function App() {
         </p>
       </header>
 
-			<button onClick={testfunc}>test button</button>
+      <Stickies database={database}/>
 
       <div style={{}}>
         <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>
