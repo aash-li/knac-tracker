@@ -21,13 +21,14 @@ class Stickies extends Component {
   }
 
   updateDom(data) {
-      const items = data.map((stickie) =>
-        <div class="stickie">
-          <h5>{stickie.username}</h5>
-          <img src={stickie.imageUrl}/>
-          <p>{stickie.message}</p>
-        </div>
-      );
+    console.log(data);
+    const items = data.map((stickie) =>
+      <div class="stickie">
+        <h5>{stickie.username}</h5>
+        <img src={stickie.imageUrl}/>
+        <p>{stickie.message}</p>
+      </div>
+    );
 
     this.setState({
       dom: items

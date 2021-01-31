@@ -7,7 +7,7 @@ function Goal(props) {
     <div className="goal">
       <div class="container">
         <div class="row align-items-center my-5">
-          <Habit id='1' database={firebase.database()}/>
+          <Habit id='1' userId={props.userId} database={firebase.database()}/>
         </div>
       </div>
     </div>

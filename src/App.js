@@ -8,7 +8,6 @@ import Habit from './components/Habit';
 import Progress from './components/Progress';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Home, Goal, Contact } from "./components";
-import Stickies from './components/Stickies';
 
 function App() {
 
@@ -22,8 +21,8 @@ function App() {
 
   // logging a user to knac database and also record in App function
   let logUser = (userObj) => {
-    setUserId(userObj.googleId);
-    database.ref("users/"+userObj.googleId).set({
+      setUserId(userObj.googleId);
+      database.ref("users/"+userObj.googleId).set({
       name: userObj.name,
       imageUrl: userObj.imageUrl,
       id: userObj.googleId
@@ -38,7 +37,7 @@ function App() {
         </p>
       </header>
       <div style={{}}>
-        <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)} class="login"/>
+        <Login onSuccess={logUser} loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)} class="login"/>
         {loggedIn ? <p>Hello {name}</p>: <p>Not logged in</p> }
         <Logout loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)}/>
       </div>
@@ -46,18 +45,11 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={() => <Home />} />
-          <Route path="/Goal" exact component={() => <Goal database={database}/>}/>
+          <Route path="/Goal" exact component={() => <Goal userId={currentUserId} database={database}/>}/>
           <Route path="/contact" exact component={() => <Contact />} />
         </Switch>
       </Router>
-      <Habit id='1' database={database} userId={currentUserId} />
       <div><Progress /></div>
-
-      <div style={{}}>
-        <Login onSuccess={logUser} loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>
-        {loggedIn ? <p>Hello {name}</p>: <p>Not logged in</p> }
-        <Logout loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)}/>
-      </div>
     </div>
   );
 }

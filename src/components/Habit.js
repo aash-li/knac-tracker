@@ -31,6 +31,7 @@ class Habit extends Component {
   }
 
   updateInfo(data) {
+    console.log(data)
     this.setState({
       title: data.title,
       day: data.day,
@@ -46,7 +47,6 @@ class Habit extends Component {
   }
 
   submitComment = () => {
-    let name;
     this.props.database.ref('users/'+this.props.userId).once('value').then((snapshot) => {
       const data = snapshot.val();
       this.props.database.ref('habits/habit'+this.props.id+'/stickies/'+this.state.stickiesCount)
