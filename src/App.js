@@ -49,7 +49,6 @@ function App() {
           <Route path="/contact" exact component={() => <Contact />} />
         </Switch>
       </Router>
-      <div><Progress /></div>
     </div>
   );
 }
