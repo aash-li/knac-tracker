@@ -8,12 +8,14 @@ import { refreshTokenSetup } from '../utils/refreshToken';
 
 const clientId = '608833851290-55503koreo294pqg48nqpqu6lpi549ka.apps.googleusercontent.com' //insert client id here
 
+// props: onSuccess: stores the user ID in the App function and updates to the database
 function Login(props) {
   const [clickedLoginButton, setClickedLoginButton] = useState(false)
   const [name, setName] = useState()
 
   const onSuccess = (res) => {
     console.log('Login Success: currentUser:', res.profileObj);
+    props.onSuccess(res.profileObj);
     refreshTokenSetup(res);
     props.setLoggedIn(true);
     props.setName(res.profileObj.name)

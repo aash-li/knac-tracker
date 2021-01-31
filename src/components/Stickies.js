@@ -14,20 +14,20 @@ class Stickies extends Component {
 
   componentDidMount() {
     let stickiesRef = this.props.database.ref("habits/habit"+this.props.habitId+"/stickies");
-    let data;
     stickiesRef.on('value', (snapshot) => {
-      data = snapshot.val();
+      const data = snapshot.val();
       this.updateDom(data);
     });
   }
 
-  updateDom(notes) {
-    const items = notes.map((stickie) => 
-      <div class="stickie">
-        <h5>{stickie.username}</h5>
-        <p>{stickie.message}</p>
-      </div>
-    );
+  updateDom(data) {
+      const items = data.map((stickie) =>
+        <div class="stickie">
+          <h5>{stickie.username}</h5>
+          <img src={stickie.imageUrl}/>
+          <p>{stickie.message}</p>
+        </div>
+      );
 
     this.setState({
       dom: items

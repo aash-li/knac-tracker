@@ -7,6 +7,7 @@ import Progress from './Progress'
  *
  * id - the id of the habit in the database
  * database - the knac database
+ * userId: the id of the current user
  */
 class Habit extends Component {
   constructor(props) {
@@ -45,10 +46,16 @@ class Habit extends Component {
   }
 
   submitComment = () => {
-    this.props.database.ref('habits/habit'+this.props.id+'/stickies/'+this.state.stickiesCount)
-    .set({
-      username: 'kalet',
-      message: this.state.comment
+    let name;
+    this.props.database.ref('users/'+this.props.userId).once('value').then((snapshot) => {
+      const data = snapshot.val();
+      this.props.database.ref('habits/habit'+this.props.id+'/stickies/'+this.state.stickiesCount)
+      .set({
+        username: (data) ? data.name : "Anonymous",
+        message: this.state.comment,
+        userId: (data) ? data.id : null,
+        imageUrl: (data) ? data.imageUrl: null
+      });
     });
   }
 
