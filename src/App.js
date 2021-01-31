@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Stickies from './components/Stickies';
+import Habit from './components/Habit';
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
         </p>
       </header>
 
-      <Stickies database={database}/>
+      <Habit id='1' database={database}/>
 
       <div style={{}}>
         <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>

@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 
+/**
+ * Props:
+ * habitId: the id of the habit that these stickers belong to
+ * database: the database that contains the information about all habits
+ */
 class Stickies extends Component {
 
   constructor(props) {
@@ -8,12 +13,11 @@ class Stickies extends Component {
   }
 
   componentDidMount() {
-    let messagesRef = this.props.database.ref("habits/habit1/stickies");
+    let stickiesRef = this.props.database.ref("habits/habit"+this.props.habitId+"/stickies");
     let data;
-    messagesRef.once('value').then((snapshot) => {
+    stickiesRef.on('value', (snapshot) => {
       data = snapshot.val();
       this.updateDom(data);
-      console.log(data);
     });
   }
 
