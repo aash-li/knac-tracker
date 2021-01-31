@@ -99,3 +99,14 @@ li {
 .nav-link:hover {
   background-color: gray;
 }
+
+.username {
+  float: left;
+  margin-left: 20px;
+}
+
+.login {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

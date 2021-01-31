@@ -1,8 +1,10 @@
 import React from 'react';
+import { Checkbox } from '@material-ui/core';
+import UserRow from './UserRow'
 
 function Progress() {
     return (
-        <h1> Progress </h1>
+        <Checkbox />
     )
 }
 
