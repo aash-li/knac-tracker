@@ -16,23 +16,19 @@ function App() {
   var database = firebase.database();
 
 
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [name, setName] = useState()
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [name, setName] = useState();
+  const [currentUserId, setUserId] = useState(null);
 
-  let messagesRef = database.ref("habits/habit1");
-  messagesRef.once('value').then((snapshot) => {
-    const data = snapshot.val();
-  });
-
-	function testfunc() {
-    /*
-	  database.ref("tests/test1").set( {
-			testnum : 1,
-			really : true,
-			yay : "no"
-		});
-    */
-	}
+  // logging a user to knac database and also record in App function
+  let logUser = (userObj) => {
+    setUserId(userObj.googleId);
+    database.ref("users/"+userObj.googleId).set({
+      name: userObj.name,
+      imageUrl: userObj.imageUrl,
+      id: userObj.googleId
+    });
+  }
 
   return (
     <div className="21 days">
@@ -51,12 +47,11 @@ function App() {
           <Route path="/contact" exact component={() => <Contact />} />
         </Switch>
       </Router>
-      <Habit id='1' database={database}/>
+      <Habit id='1' database={database} userId={currentUserId} />
       <div><Progress /></div>
-      <Stickies database={database}/>
 
       <div style={{}}>
-        <Login loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>
+        <Login onSuccess={logUser} loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)} setName={(name) => setName(name)}/>
         {loggedIn ? <p>Hello {name}</p>: <p>Not logged in</p> }
         <Logout loggedIn={loggedIn} setLoggedIn = {(bool) => setLoggedIn(bool)}/>
       </div>
