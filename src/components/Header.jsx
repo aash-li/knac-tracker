@@ -18,15 +18,17 @@ function Header(props) {
                   Home
                 </Link>
               </li>
-              <li
-                class={`nav-item  ${
-                  props.location.pathname === "/goal" ? "active" : ""
-                }`}
-              >
-                <Link class="nav-link" to="/goal">
-                  Goal
-                </Link>
-              </li>
+              {props.isLoggedIn &&
+                <li
+                  class={`nav-item  ${
+                    props.location.pathname === "/goal" ? "active" : ""
+                  }`}
+                >
+                  <Link class="nav-link" to="/goal">
+                    Goal
+                  </Link>
+                </li>
+              }
               <li
                 class={`nav-item  ${
                   props.location.pathname === "/contact" ? "active" : ""
