@@ -70,6 +70,13 @@ class App extends Component<{}, AppState> {
     }
 
     render() {
+        const isLoggedIn = this.state.loggedIn;
+        let button;
+        if (isLoggedIn) {
+            button = <Logout loggedIn={this.state.loggedIn} setLoggedIn = {this.logoutUser}/>
+        } else {
+            button = <Login onSuccess={this.logUser} loggedIn={this.state.loggedIn} setLoggedIn = {this.loginUser} setName={this.setName} class="login"/>
+        }
         return (
             <div className="21 days">
               <header className="21 Days">
@@ -78,8 +85,7 @@ class App extends Component<{}, AppState> {
                 </p>
               </header>
             <div style={{}}>
-                <Login onSuccess={this.logUser} loggedIn={this.state.loggedIn} setLoggedIn = {this.loginUser} setName={this.setName} class="login"/>
-                <Logout loggedIn={this.state.loggedIn} setLoggedIn = {this.logoutUser}/>
+                {button}
             </div>
               <Router>
                 <Header />
