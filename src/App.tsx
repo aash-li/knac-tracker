@@ -70,13 +70,34 @@ class App extends Component<{}, AppState> {
     }
 
     render() {
-        const isLoggedIn = this.state.loggedIn;
+        const loginStatus = this.state.loggedIn;
         let button;
-        if (isLoggedIn) {
-            button = <Logout loggedIn={this.state.loggedIn} setLoggedIn = {this.logoutUser}/>
+        let header;
+        if (loginStatus) {
+            button = <Logout loggedIn={loginStatus} setLoggedIn = {this.logoutUser}/>
+            header = (
+            <Router>
+                <Header isLoggedIn={loginStatus}/>
+                <Switch>
+                    <Route path="/" exact component={() => <Home isLoggedIn={loginStatus}/>} />
+                    <Route path="/Goal" exact component={() => <Goal userId={this.state.currentUser} database={this.state.database}/>}/>
+                    <Route path="/contact" exact component={() => <Contact />} />
+                </Switch>
+            </Router>
+            );
         } else {
-            button = <Login onSuccess={this.logUser} loggedIn={this.state.loggedIn} setLoggedIn = {this.loginUser} setName={this.setName} class="login"/>
+            button = <Login onSuccess={this.logUser} loggedIn={loginStatus} setLoggedIn = {this.loginUser} setName={this.setName} class="login"/>
+            header = (
+            <Router>
+                <Header isLoggedIn={loginStatus}/>
+                <Switch>
+                    <Route path="/" exact component={() => <Home isLoggedIn={loginStatus}/>} />
+                    <Route path="/contact" exact component={() => <Contact />} />
+                </Switch>
+            </Router>
+            );
         }
+
         return (
             <div className="21 days">
               <header className="21 Days">
@@ -87,14 +108,7 @@ class App extends Component<{}, AppState> {
             <div style={{}}>
                 {button}
             </div>
-              <Router>
-                <Header />
-                <Switch>
-                  <Route path="/" exact component={() => <Home isLoggedIn={this.state.loggedIn}/>} />
-                  <Route path="/Goal" exact component={() => <Goal userId={this.state.currentUser} database={this.state.database}/>}/>
-                  <Route path="/contact" exact component={() => <Contact />} />
-                </Switch>
-              </Router>
+                {header}
             </div>
           );
     }
