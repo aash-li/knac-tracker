@@ -8,6 +8,7 @@ import Habit from './components/Habit';
 import Progress from './components/Progress';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Home, Goal, Contact } from "./components";
+import About from "./components/About";
 
 interface AppState {
     loggedIn: boolean;
@@ -92,6 +93,7 @@ class App extends Component<{}, AppState> {
                 <Header isLoggedIn={loginStatus}/>
                 <Switch>
                     <Route path="/" exact component={() => <Home isLoggedIn={loginStatus}/>} />
+                    <Route path="/about" exact component={() => <About />} />
                     <Route path="/contact" exact component={() => <Contact />} />
                 </Switch>
             </Router>
