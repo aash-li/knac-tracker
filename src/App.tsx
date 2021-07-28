@@ -74,19 +74,19 @@ class App extends Component<{}, AppState> {
         const loginStatus = this.state.loggedIn;
         let button;
         let header;
-        if (loginStatus) {
+        if (loginStatus) {  // Logged In
             button = <Logout loggedIn={loginStatus} setLoggedIn = {this.logoutUser}/>
             header = (
             <Router>
                 <Header isLoggedIn={loginStatus}/>
                 <Switch>
-                    <Route path="/" exact component={() => <Home isLoggedIn={loginStatus}/>} />
+                    <Route path="/" exact component={() => <Home isLoggedIn={loginStatus} userId={this.state.currentUser} database={this.state.database}/>} />
                     <Route path="/Goal" exact component={() => <Goal userId={this.state.currentUser} database={this.state.database}/>}/>
                     <Route path="/contact" exact component={() => <Contact />} />
                 </Switch>
             </Router>
             );
-        } else {
+        } else {  // Logged out
             button = <Login onSuccess={this.logUser} loggedIn={loginStatus} setLoggedIn = {this.loginUser} setName={this.setName} class="login"/>
             header = (
             <Router>
