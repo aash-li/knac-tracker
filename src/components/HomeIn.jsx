@@ -27,11 +27,11 @@ class HomeIn extends Component {
     // get the currentHabitID
     let currentHabitIDRef = this.props.database.ref("habits/currentHabitID")
     // console.log(this.props.database.ref("habitToUser/entry1/habitID"))
-    var currentHabitID;
+    let currentHabitID;
     currentHabitIDRef.on('value', (snapshot) => {
       currentHabitID = snapshot.val();
-      console.log(snapshot.val());
     })
+    console.log(currentHabitID);
     this.props.database.ref('habits/habit'+currentHabitID).set({
       title: this.state.comment,
       userId: this.props.userId
@@ -39,7 +39,35 @@ class HomeIn extends Component {
     this.props.database.ref('habits').update({
       currentHabitID: currentHabitID + 1
     })
+
+    // get number of habits the user has
+    let numHabitsRef = this.props.database.ref('userToHabit/' + this.props.userId + '/numHabits')
+    let numHabits;
+    numHabitsRef.on('value', (snapshot) => {
+      numHabits = snapshot.val();
+      console.log(snapshot.val());
+    })
+
+    if (numHabits == null) {
+      console.log("creating new slot")
+      // create a new slot 
+      this.props.database.ref('userToHabit/' + this.props.userId).set({
+        numHabits: 0
+      })
+      numHabits = 0
+    }
+
+    // write the new habit to userToHabit
+    this.props.database.ref('userToHabit/' + this.props.userId + "/" + numHabits).set({
+      HabitId: currentHabitID
+    })
+
+    // update the number of habits
+    this.props.database.ref('userToHabit/' + this.props.userId).update({
+      numHabits: numHabits + 1
+    })
   }
+
 
   render() {
     return (
