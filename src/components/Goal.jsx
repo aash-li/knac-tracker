@@ -20,16 +20,16 @@ class Goal extends Component{
     console.log("here are teh number of habits")
     console.log(numHabits)
     console.log(this.props.userId)
-    let allIds = {};
+    let allIds = [];
     for (var i = 0; i < numHabits; i++) {
-      let curRef = this.props.database.ref("userToHabit/this.props.userId/" + i + "/HabitId")
+      let curRef = this.props.database.ref("userToHabit/" + this.props.userId + "/" + i + "/HabitId")
       let curId;
       curRef.on('value', (snapshot) => {
         curId = snapshot.val();
       })
       console.log("getting an id here")
       console.log(curId)
-      allIds.add(curId)
+      allIds.push(curId)
     }
     this.setState({
       options: allIds
