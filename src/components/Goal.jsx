@@ -13,44 +13,32 @@ class Goal extends Component{
   }
 
   componentDidMount() {
-    let numHabitsRef = this.props.database.ref("userToHabit/" + this.props.userId + "/numHabits")
-    let numHabits;
-    numHabitsRef.on('value', (snapshot) => {
-      numHabits = snapshot.val();
-    })
-    console.log("here are teh number of habits")
-    console.log(numHabits)
-    console.log(this.props.userId)
-    let allIds = [];
-    let habitNames = [];
-    for (var i = 0; i < numHabits; i++) {
-      // get the habit id
-      let curRef = this.props.database.ref("userToHabit/" + this.props.userId + "/" + i + "/HabitId")
-      let curId;
-      curRef.on('value', (snapshot) => {
-        curId = snapshot.val();
-      })
-
-      console.log("here is the current id " + curId)
-      allIds.push(curId)
-
-      // get the name of the habit using the id
-      let nameRef = this.props.database.ref("habits/habit" + curId + "/title")
-      let name;
-      nameRef.on('value', (snapshot) => {
-        name = snapshot.val();
-      })
-      console.log("the name is: " + name)
-      habitNames.push(name)
-    }
-    this.setState({
-      options: allIds,
-      optionNames: habitNames
-    })
+    this.updateDropdown();
     console.log("these are the ids..")
     console.log(this.state.options)
     console.log("here are the names...")
     console.log(this.state.optionNames)
+    if (this.state.options == null || this.state.optionNames == null) {
+      return;
+    }
+  }
+
+  updateDropdown() {
+    let habitRef = this.props.database.ref("/userToHabit/" + this.props.userId)
+    let data;
+    habitRef.on('value', (snapshot) => {
+      data = snapshot.val();
+      console.log(data)
+      const itemsId = data.map((habitEntry) =>
+        habitEntry.HabitId
+      );
+
+      const itemsName = data.map((habitEntry) =>
+        habitEntry.HabitName  
+      );
+
+      this.setState({options: itemsId, optionNames: itemsName})
+    });
   }
 
   render() {
